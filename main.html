@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Medicines</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff3e0;
+            color: #b71c1c;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #b71c1c;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 600px;
+            margin: auto;
+        }
+        li {
+            background-color: #ffcc80;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .medicine-name {
+            font-weight: bold;
+        }
+        .money-randomizer {
+            background-color: #b71c1c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+        }
+        .qr-code-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .qr-code {
+            width: 150px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Medicines</h1>
+    <ul>
+        <li><span class="medicine-name">Aspirin</span> - Pain reliever</li>
+        <li><span class="medicine-name">Ibuprofen</span> - Anti-inflammatory</li>
+        <li><span class="medicine-name">Paracetamol</span> - Fever reducer</li>
+        <li><span class="medicine-name">Amoxicillin</span> - Antibiotic</li>
+        <li><span class="medicine-name">Ciprofloxacin</span> - Antibiotic</li>
+        <li><span class="medicine-name">Azithromycin</span> - Antibiotic</li>
+        <li><span class="medicine-name">Metformin</span> - Diabetes medication</li>
+        <li><span class="medicine-name">Atorvastatin</span> - Cholesterol medication</li>
+        <li><span class="medicine-name">Lisinopril</span> - Blood pressure medication</li>
+        <li><span class="medicine-name">Metoprolol</span> - Beta blocker</li>
+    </ul>
+    <button class="money-randomizer" onclick="randomizeMoney()">Randomize Money</button>
+    <p id="money-amount" style="text-align: center;"></p>
+    <div class="qr-code-container">
+        <h2>Scan to Access</h2>
+        <img id="qr-code" class="qr-code" src="" alt="QR Code">
+    </div>
+    <script>
+        function randomizeMoney() {
+            const min = 5;
+            const max = 100;
+            const amount = (Math.random() * (max - min) + min).toFixed(2);
+            document.getElementById('money-amount').innerText = `Randomized Amount: $${amount}`;
+        }
+
+        function generateQRCode() {
+            const url = window.location.href;
+            const qrCodeContainer = document.getElementById('qr-code');
+            const qrCodeAPI = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(url)}&size=150x150`;
+            qrCodeContainer.src = qrCodeAPI;
+        }
+
+        window.onload = generateQRCode;
+    </script>
+</body>
+</html>
